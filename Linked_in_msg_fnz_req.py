@@ -70,6 +70,9 @@ def send_msg():
 
 
 def send_frnd_req():
+    for i in range(30):         # Scroll multiple times to generate li list to ADD FRIENDS
+        driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")  
+        time.sleep(2)  # sleep and again scroll to generate all li
     fnd_lst = page_soup.find('ul', attrs={'class': 'js-discover-entity-list__pymk discover-entity-list ember-view'}).findAll('li')
     j = 1
     lst = []
