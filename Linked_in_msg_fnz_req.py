@@ -24,8 +24,7 @@ def send_msg():
         driver.find_element_by_class_name('mn-community-summary__sub-section').click()
 
         for i in range(0, 4):
-            driver.execute_script(
-                "window.scrollBy(0, document.body.scrollHeight)")  # Scroll multiple times to get all li list for friends
+            driver.execute_script("window.scrollBy(0, document.body.scrollHeight)")  # Scroll multiple times to get all li list for friends
             time.sleep(2)  # sleep and again scroll to generate all li
 
         page_soup_1 = soup(driver.page_source, 'lxml')
