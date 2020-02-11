@@ -10,9 +10,9 @@ import time
 driver = webdriver.Chrome(executable_path='C:\\Users\Khushi Raj\Desktop\driver\chromedriver')
 driver.get('https://www.linkedin.com/login')
 driver.maximize_window()
-driver.find_element_by_id('username').send_keys('dreamsagar1992@gmail.com')
+driver.find_element_by_id('username').send_keys('******@gmail.com')
 time.sleep(2)
-driver.find_element_by_id('password').send_keys('13/06/91')
+driver.find_element_by_id('password').send_keys('*********')
 driver.find_element_by_xpath("//*[@id='app__container']/main/div/form/div[3]/button").click()
 driver.find_element_by_xpath("//*[@id='mynetwork-nav-item']/a").click()  # click on Mynetwork link to find All new Friend's
 page_soup = soup(driver.page_source, 'lxml')
@@ -30,13 +30,11 @@ def send_msg():
 
         page_soup_1 = soup(driver.page_source, 'lxml')
         time.sleep(5)
-        msg_fnd_lst = page_soup_1.findAll('div', attrs={'class': 'mn-connection-card__details'})
-        time.sleep(5)
-        print(len(msg_fnd_lst))
+        frnd_lst = page_soup_1.findAll('div', attrs={'class': 'mn-connection-card__details'})
+        time.sleep(5)        
         i = 1
-        msg_url_lst = []
-
-        for req in msg_fnd_lst:
+        msg_sent_lst = []
+        for req in frnd_lst:
             try:
                 page_soup_1 = soup(driver.page_source, 'lxml')
                 time.sleep(10)
@@ -61,12 +59,12 @@ def send_msg():
                     msg_url = req.contents[1].attrs['href']
                     full_msg_url = 'https://www.linkedin.com' + msg_url
                     name = req.find('span', attrs={'class': 'mn-connection-card__name t-16 t-black t-bold'}).text.strip()
-                    msg_url_lst.append({'NAME': name, 'URL': full_msg_url})
+                    msg_sent_lst.append({'NAME': name, 'URL': full_msg_url})
                     i += 1
 
             except Exception:
                 i += 1
-                pass
+                pass            
 
     except Exception:
         print("Very First Error on Finding Friends")
